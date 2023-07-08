@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\File;
+use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 class Post
 {
@@ -24,12 +25,32 @@ class Post
 
     public static function all()
     {
-        // через вспомогательный класс File читаем все файлы из директории resources/posts/
-        // и создаем массив
-        $files = File::files(resource_path("posts/"));
+        return collect(File::files(resource_path("posts")))
+            ->map(fn ($file) => YamlFrontMatter::parseFile($file))
+            ->map(
+                fn ($document) => new Post(
+                    $document->title,
+                    $document->excerpt,
+                    $document->date,
+                    $document->body(),
+                    $document->slug,
+                )
+            );
 
-        // через колбэк получаем контент файлов в массиве и возвращаем новый массив с этим контентом
-        return array_map(fn ($file) => $file->getContents(), $files);
+        // реализация без использования коллекции
+        // $posts = array_map(function ($file) {
+        //     $document = YamlFrontMatter::parseFile($file);
+
+        //     return new Post(
+        //         $document->title,
+        //         $document->excerpt,
+        //         $document->date,
+        //         $document->body(),
+        //         $document->slug,
+        //     );
+        // }, $files);
+
+        // return $posts;
     }
 
     public static function find($slug)
