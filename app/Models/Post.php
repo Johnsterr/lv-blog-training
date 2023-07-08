@@ -55,13 +55,6 @@ class Post
 
     public static function find($slug)
     {
-        // resource_path - хелпер для пути до resources
-        if (!file_exists($path = resource_path("posts/{$slug}.html"))) {
-            throw new ModelNotFoundException();
-        }
-
-        // cache - при обновлении страницы контент будет отдаваться из кеша после первого рендера в браузер
-        // после 1200 секунд, если клиент обновит страницу, будет рендер и снова начнется отсчет для кеша
-        return cache()->remember("posts.{$slug}", 1200, fn () => file_get_contents($path));
+        return static::all()->firstWhere('slug', $slug);
     }
 }
