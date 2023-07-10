@@ -15,7 +15,7 @@
     <article>
         <h2>
             <a href="/posts/<?= $post->slug ?>">
-                <?= $post->title ?>
+                {{ $post->title }}
             </a>
         </h2>
         <div>
