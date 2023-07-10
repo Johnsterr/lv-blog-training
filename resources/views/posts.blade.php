@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layout')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>My blog</title>
-
-    <link rel="stylesheet" href="/css/app.css">
-</head>
-
-<body>
+@section('content')
     @foreach ($posts as $post)
         {{-- внутри foreach доступна переменная $loop --}}
         <article class="{{ $loop->even ? 'foobar' : '' }}">
@@ -24,6 +14,4 @@
             </div>
         </article>
     @endforeach
-</body>
-
-</html>
+@endsection
