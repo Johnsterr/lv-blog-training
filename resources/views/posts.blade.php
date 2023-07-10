@@ -1,9 +1,6 @@
-@extends('layout')
-
-@section('content')
+<x-layout>
     @foreach ($posts as $post)
-        {{-- внутри foreach доступна переменная $loop --}}
-        <article class="{{ $loop->even ? 'foobar' : '' }}">
+        <article>
             <h2>
                 <a href="/posts/{{ $post->slug }}">
                     {{ $post->title }}
@@ -14,4 +11,4 @@
             </div>
         </article>
     @endforeach
-@endsection
+</x-layout>
