@@ -1,9 +1,7 @@
 <?php
 
 use App\Models\Post;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
-use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +20,17 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('posts/{post}', function ($id) {
+// оставить такую запись и в шаблоне вывода всех постов ссылка линкуется
+// на slug, а не на id, тогда в модели Post в функции getRouteKeyName
+// нужно указать ссылаться на slug, а не на id
+Route::get('posts/{post}', function (Post $post) {
     return view('post', [
-        'post' => Post::findOrFail($id)
+        'post' => $post
     ]);
 });
+
+// Route::get('posts/{post:slug}', function (Post $post) { // Post::where('slug', $post)->firstOrFail()
+//     return view('post', [
+//         'post' => $post
+//     ]);
+// });

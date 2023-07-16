@@ -9,8 +9,13 @@ class Post extends Model
 {
     use HasFactory;
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     // игнорирование полей, которые указаны в массиве при создании поста
-    protected $guarded = ['id'];
+    protected $guarded = [];
 
     // заполняемые поля поста, которые указаны в массиве
     /*
