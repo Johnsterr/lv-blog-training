@@ -23,14 +23,14 @@ Route::get('/', function () {
 // оставить такую запись и в шаблоне вывода всех постов ссылка линкуется
 // на slug, а не на id, тогда в модели Post в функции getRouteKeyName
 // нужно указать ссылаться на slug, а не на id
-Route::get('posts/{post}', function (Post $post) {
-    return view('post', [
-        'post' => $post
-    ]);
-});
-
-// Route::get('posts/{post:slug}', function (Post $post) { // Post::where('slug', $post)->firstOrFail()
+// Route::get('posts/{post}', function (Post $post) {
 //     return view('post', [
 //         'post' => $post
 //     ]);
 // });
+
+Route::get('posts/{post:slug}', function (Post $post) { // Post::where('slug', $post)->firstOrFail()
+    return view('post', [
+        'post' => $post
+    ]);
+});
