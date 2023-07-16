@@ -6,6 +6,10 @@ body {
     font-family: sans-serif;
 }
 
+h1 {
+    font-weight: normal;
+}
+
 p {
     line-height: 1.6;
 }

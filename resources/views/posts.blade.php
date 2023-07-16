@@ -3,7 +3,7 @@
         <article>
             <h2>
                 <a href="/posts/{{ $post->id }}">
-                    {{ $post->title }}
+                    {!! $post->title !!}
                 </a>
             </h2>
             <div>
