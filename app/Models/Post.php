@@ -10,6 +10,7 @@ class Post extends Model
     use HasFactory;
 
     protected $guarded = [];
+    protected $with = ['category', 'author'];
 
     // типы отношений hasOne, hasMany, belongsTo, belongsToMany
     public function category()
