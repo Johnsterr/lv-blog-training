@@ -21,7 +21,7 @@ Route::get('/', function () {
         'posts' => Post::latest()->get(),
         'categories' => Category::all()
     ]);
-});
+})->name('home');
 
 // оставить такую запись и в шаблоне вывода всех постов ссылка линкуется
 // на slug, а не на id, тогда в модели Post в функции getRouteKeyName
@@ -44,7 +44,7 @@ Route::get('categories/{category:slug}', function (Category $category) {
         'currentCategory' => $category,
         'categories' => Category::all()
     ]);
-});
+})->name('category');
 
 Route::get('authors/{author:username}', function (User $author) {
     return view('posts', [

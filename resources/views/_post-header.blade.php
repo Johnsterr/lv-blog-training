@@ -31,10 +31,10 @@
                     </button>
                 </x-slot>
 
-                <x-dropdown-item href="/">All</x-dropdown-item>
+                <x-dropdown-item href="/" :active="request()->routeIs('home')">All</x-dropdown-item>
 
                 @foreach ($categories as $category)
-                    <x-dropdown-item href="/categories/{{ $category->slug }}" :active="isset($currentCategory) && $currentCategory->is($category)">
+                    <x-dropdown-item href="/categories/{{ $category->slug }}" :active='request()->is("categories/{$category->slug}")'>
                         {{ ucwords($category->name) }}
                     </x-dropdown-item>
                 @endforeach
